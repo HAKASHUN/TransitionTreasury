@@ -118,6 +118,10 @@ public class TRNavgationTransitionDelegate: NSObject, UINavigationControllerDele
                 fromVC?.view.removeGestureRecognizer(edgePanGestureRecognizer)
             } else {
                 transition.cancelPop = true
+                if #available(iOS 10.0, *) {
+                  // MARK:- Patch for iOS10 issue (https://github.com/WorldDownTown/ZoomTransitioning/issues/6)
+                  transition.percentTransition?.updateInteractiveTransition(0.0)
+                }
                 transition.percentTransition?.cancelInteractiveTransition()
             }
             transition.percentTransition = nil
