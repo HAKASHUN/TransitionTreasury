@@ -118,9 +118,11 @@ public extension UIView {
      Create copy snapshot view.
      */
     public func tr_copyWithSnapshot() -> UIView {
-        let view = snapshotViewAfterScreenUpdates(false)
-        view!.frame = frame
-        return view!
+        guard let view = snapshotViewAfterScreenUpdates(false) else {
+          return tr_copyWithContents()
+        }
+        view.frame = frame
+        return view
     }
     /**
      Add view with convert point.
